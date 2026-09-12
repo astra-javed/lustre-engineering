@@ -52,3 +52,6 @@ Before → Change → Build → Test → After
 ## Status
 
 This repository is being built incrementally as part of a hands-on engineering mentorship. Early content will favor small, reproducible labs over large collections of notes.
+## Development Environment
+
+This repository is developed and tested from a Rocky Linux engineering lab.
