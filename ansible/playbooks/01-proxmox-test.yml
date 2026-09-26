@@ -1,0 +1,29 @@
+---
+- name: ANSIBLE-003 - Test Proxmox API access
+  hosts: proxmox
+  gather_facts: false
+
+  vars:
+    api_host: "pve.lab.astrahm.com"
+    api_port: 8006
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: false
+
+  tasks:
+    - name: Retrieve Proxmox VM 1003 information
+      community.proxmox.proxmox_vm_info:
+        api_host: "{{ api_host }}"
+        api_port: "{{ api_port }}"
+        api_user: "{{ api_user }}"
+        api_token_id: "{{ api_token_id }}"
+        api_token_secret: "{{ api_token_secret }}"
+        validate_certs: "{{ validate_certs }}"
+        vmid: 1003
+        config: current
+      register: proxmox_vm
+
+    - name: Display VM information
+      ansible.builtin.debug:
+        var: proxmox_vm
