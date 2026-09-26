@@ -1,0 +1,24 @@
+---
+- name: LAB-009 - Validate Lustre server baseline
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Display hostname
+      ansible.builtin.debug:
+        msg: "Host: {{ ansible_hostname }}"
+    - name: Display operating system
+      ansible.builtin.debug:
+        msg: "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Display kernel version
+      ansible.builtin.debug:
+        msg: "Kernel: {{ ansible_kernel }}"
+    - name: Display CPU information
+      ansible.builtin.debug:
+        msg: "CPU: {{ ansible_processor_vcpus }} vCPU, architecture {{ ansible_architecture }}"
+    - name: Display memory
+      ansible.builtin.debug:
+        msg: "Memory: {{ ansible_memtotal_mb }} MB"        
+    - name: Display block devices
+      ansible.builtin.debug:
+        var: ansible_devices
