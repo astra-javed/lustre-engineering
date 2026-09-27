@@ -1,0 +1,33 @@
+---
+- name: ANSIBLE-004 - Configure Lustre OSS data disk
+  hosts: proxmox
+  gather_facts: false
+
+  vars:
+    api_host: "pve.lab.astrahm.com"
+    api_port: 8006
+    api_user: "{{ proxmox_api_user }}"
+    api_token_id: "{{ proxmox_api_token_id }}"
+    api_token_secret: "{{ proxmox_api_token_secret }}"
+    validate_certs: false
+
+    oss_vmid: 1003
+    oss_data_disk: "scsi1"
+    oss_data_storage: "local-lvm"
+    oss_data_size_gib: 100
+
+  tasks:
+    - name: Create Lustre OSS data disk
+      community.proxmox.proxmox_disk:
+        api_host: "{{ api_host }}"
+        api_port: "{{ api_port }}"
+        api_user: "{{ api_user }}"
+        api_token_id: "{{ api_token_id }}"
+        api_token_secret: "{{ api_token_secret }}"
+        validate_certs: "{{ validate_certs }}"
+        vmid: "{{ oss_vmid }}"
+        disk: "{{ oss_data_disk }}"
+        storage: "{{ oss_data_storage }}"
+        size: "{{ oss_data_size_gib }}"
+        state: present
+        create: regular
